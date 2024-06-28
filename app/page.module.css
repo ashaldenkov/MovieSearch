@@ -1,0 +1,10 @@
+
+.container {
+  width: 90vw;
+  max-width: 1010px;
+  min-width: none;
+  background-color: white;
+  margin: 0 auto;
+  padding: 21px 32px;
+}
+
