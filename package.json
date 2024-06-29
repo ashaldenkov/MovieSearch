@@ -9,7 +9,9 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@ant-design/nextjs-registry": "^1.0.0",
     "@types/uuid": "^10.0.0",
+    "antd": "^5.18.3",
     "date-fns": "^3.6.0",
     "next": "14.2.4",
     "react": "^18",

@@ -8,3 +8,9 @@
   padding: 21px 32px;
 }
 
+@media only screen and (max-width: 768px) {
+  .container {
+    width: 100vw;
+    padding: 20px 16px;
+  }
+}

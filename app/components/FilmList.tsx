@@ -1,4 +1,3 @@
-
 import React from 'react'
 import FilmCard from "./FilmCard";
 import styles from './FilmList.module.css'
@@ -15,8 +14,11 @@ interface FilmComponent {
 
 
   async function getFilms() {
+    //imitate delay for loading screen
+        await new Promise(resolve => setTimeout(resolve,1000))
+
         const res = await fetch('https://api.themoviedb.org/3/movie/popular', {
-            cache: "force-cache", 
+            cache: "no-store", 
             headers: {
             "Content-Type": "application/json",
             'Authorization': `Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJiZTdhYmViMmI4ODRiNWMyZWM0NmFjOWVhMmJjY2ZkMSIsIm5iZiI6MTcxOTI4NDEwNy43NjAxNjMsInN1YiI6IjY2N2EzMGJjNGFmOTM1YTgwY2Y2OTQ4YyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.BYxyk2Wyu7uN44FwhqiRzrdSTcqmV_DL3VI8YXBRFLk`
