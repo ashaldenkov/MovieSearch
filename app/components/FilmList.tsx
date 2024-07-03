@@ -2,6 +2,7 @@ import React from 'react'
 import FilmCard from "./FilmCard";
 import styles from './FilmList.module.css'
 
+
 interface FilmComponent {
     overview: string,
     id: number,
@@ -13,11 +14,9 @@ interface FilmComponent {
 }
 
 
-  async function getFilms() {
-    //imitate delay for loading screen
-        await new Promise(resolve => setTimeout(resolve,1000))
-
-        const res = await fetch('https://api.themoviedb.org/3/movie/popular', {
+async function getFilms(page: number) {
+        const res = await fetch(`https://api.themoviedb.org/3/movie/popular?page=${page}`, {
+            next: { tags: ['page'] },
             cache: "no-store", 
             headers: {
             "Content-Type": "application/json",
@@ -30,7 +29,7 @@ interface FilmComponent {
         }
         return res.json();
   }
-  async function getGenres() {
+async function getGenres() {
     const res = await fetch('https://api.themoviedb.org/3/genre/movie/list', {
         headers: {
         "Content-Type": "application/json",
@@ -44,8 +43,10 @@ interface FilmComponent {
     return res.json();
 }
 
-export default async function FilmList() {
-    const films = await getFilms()
+
+
+export default async function FilmList(query: any) {
+    const films = await getFilms(query.page)
     const genresList = await getGenres()
 
     return (
@@ -60,8 +61,6 @@ export default async function FilmList() {
                                 genres.push(element.name)
                             }
                         });
-                            
-                        
                     });
                 return <FilmCard key={film.id} title={film.title} desc={film.overview} date={film.release_date} tags={genres} img={film.poster_path}/>
             })

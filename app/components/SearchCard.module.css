@@ -1,0 +1,53 @@
+.container {
+    display: flex;
+    margin-top: 5px;
+    box-shadow: 0px 4px 12px 0px #00000026;
+    height: 150px;
+    border-radius: 5px;
+}
+.previewImg {
+    width: 100px;
+    height: 150px;
+}
+
+.overview {
+    display: flex;
+    flex-direction: column;
+    padding: 5px 15px;
+}
+
+    .tags {
+        display: flex;
+        flex-wrap: wrap;
+    }
+    .date {
+        font-size: 12px;
+        line-height: 22px;
+        color: #827E7E;
+    }
+
+    .title {
+        font-size: 18px;
+        line-height: 24px;
+        }
+    
+    .tag {
+        border: 1px solid #D9D9D9;
+        background-color: #FAFAFA;
+        opacity: 65%;
+        font-size: 12px;
+        line-height: 14px;
+        padding: 2px 4px;
+        border-radius: 2px;
+        margin-right: 8px;
+        margin-bottom: 7px;
+    
+    }
+    
+    .description {
+        font-size: 12px;
+        line-height: 22px;
+        height: 100%;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
