@@ -1,4 +1,4 @@
-import { Spin, Button } from "antd";
+import { Spin } from "antd";
 import styles from './loading.module.css'
 
 export default function Loading() {

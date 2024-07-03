@@ -1,7 +1,7 @@
 import React from 'react'
 import styles from './FilmCard.module.css'
 import Image from 'next/image'
-import { format } from "date-fns";
+import { format, isValid } from "date-fns";
 import { v4 as uuidv4 } from 'uuid';
 
 interface myCard {
@@ -44,7 +44,8 @@ const FilmCard = ({ title, desc, tags, date, img }: myCard) => {
       />
       <div className={styles.info}>
         <div className={styles.title}>{title}</div>
-        <div className={styles.date}>{format(date, 'LLLL dd, yyyy')}</div>
+        
+        <div className={styles.date}>{date ? format(date, 'LLLL dd, yyyy') : 'Date not found'}</div>
         <div className={styles.tags}>
           <TagList list={tags}/>
         </div>
