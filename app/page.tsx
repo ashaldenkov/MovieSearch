@@ -4,24 +4,24 @@ import { Suspense } from 'react'
 import Loading from "./loading";
 import Pages from './components/Pages'
 import Search from "./components/Search";
+import { cookies } from 'next/headers'
 
-export default function Home({
-  params,
-  searchParams,
-}: {
+
+export default async function Home({params,searchParams,}: {
   params: { slug: string };
   searchParams?: { [key: string]: string | string[] | undefined };
 }) {
 
+  const session = cookies().get('sessionID')?.value || ''
   return (
     <main>
-      <div className={styles.container}>
-        <Search/>
-        <Suspense fallback={<Loading/>}>
-          <FilmList page={searchParams?.page}/>
-        </Suspense>
-        <Pages/>
-      </div>
+        <div className={styles.container}>
+          <Search/>
+          <Suspense fallback={<Loading/>}>
+            <FilmList page={searchParams?.page} rated={searchParams?.rated} session={session}/>
+          </Suspense>
+          <Pages rated={searchParams?.rated} session={session}/>
+        </div>
     </main>
   );
 }

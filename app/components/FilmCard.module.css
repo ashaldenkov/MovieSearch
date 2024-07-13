@@ -16,15 +16,9 @@
 }
 
 .info {
-    padding: 12px 20px;
+    padding: 12px 20px 6px 20px;
     display: flex;
     flex-direction: column;
-}
-
-.title {
-font-size: 20px;
-line-height: 28px;
-margin-bottom: 7px;
 }
 
 .date {
@@ -59,15 +53,50 @@ margin-bottom: 7px;
     overflow: hidden;
     text-overflow: ellipsis;
 }
+.title {
+    font-size: 20px;
+    line-height: 28px;
+    margin-bottom: 7px;
+    flex: 1 1 auto;
+}
+
+    .titleAndRating {
+        display: flex;
+        justify-content: flex-start;
+    }
+    .rating {
+        height: 30px;
+        width: 30px;
+        border-radius: 15px;
+        font-size: 12px;
+        line-height: 22px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex: 0 0 30px;
+        margin-left: auto;
+    }
+    .rating[data-color="bad"] {
+        border: 2px solid #E90000;
+    }
+    .rating[data-color="low"] {
+        border: 2px solid #E97E00;
+    }
+    .rating[data-color="med"] {
+        border: 2px solid #E9D100;
+    }
+    .rating[data-color="high"] {
+        border: 2px solid #66E900;
+    }
 
 @media only screen and (max-width: 768px) {
 
     .cardContainer {
         width: 100%;
-        height: 245px;
         margin-bottom: 20px;
         padding: 6px 10px;
         display: block;
+        height: auto;
     }
     
     .cardContainer:nth-child(2n) {
@@ -81,13 +110,15 @@ margin-bottom: 7px;
     }
     
     .info {
-        padding: 4px 10px;
+        padding: 4px 0 4px 10px;
         display: flex;
         flex-direction: column;
+        height: 100%;
     }
     
     .title {
     margin-left: 60px;
+
     }
     
     .date {
@@ -110,15 +141,15 @@ margin-bottom: 7px;
         border-radius: 2px;
         margin-right: 8px;
         margin-bottom: 7px;
-    
     }
     
     .description {
         font-size: 12px;
         line-height: 22px;
-        height: 100%;
+        height: 70px;
         overflow: hidden;
         text-overflow: ellipsis;
+        padding-top: 4px;
     }
 
 }
