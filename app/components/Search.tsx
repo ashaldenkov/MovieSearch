@@ -2,8 +2,9 @@
 import styles from "./Search.module.css";
 import { useState, useEffect } from 'react'
 import SearchCard from "./SearchCard";
-import { Spin, ConfigProvider } from "antd";
+import { Spin } from "antd";
 import { LoadingOutlined } from '@ant-design/icons';
+import { useRouter  } from 'next/navigation';
 
   function debounce(callback:any, delay:number) {
     let timeoutId:any;
@@ -13,21 +14,6 @@ import { LoadingOutlined } from '@ant-design/icons';
       timeoutId = setTimeout(callback, delay);
     }
   }
-  
-  async function getGenres() {
-    const res = await fetch('https://api.themoviedb.org/3/genre/movie/list', {
-        headers: {
-        "Content-Type": "application/json",
-        'Authorization': `Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJiZTdhYmViMmI4ODRiNWMyZWM0NmFjOWVhMmJjY2ZkMSIsIm5iZiI6MTcxOTI4NDEwNy43NjAxNjMsInN1YiI6IjY2N2EzMGJjNGFmOTM1YTgwY2Y2OTQ4YyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.BYxyk2Wyu7uN44FwhqiRzrdSTcqmV_DL3VI8YXBRFLk`
-        }
-    }
-    )
-    if (!res.ok) {
-        throw new Error('Failed to fetch data')
-    }
-    return res.json();
-}
-
 
 
 const Search = () => {
@@ -45,13 +31,13 @@ const Search = () => {
     const [isLoading, setLoading] = useState(false)
     const [text, setText] = useState('')
     const [genres, setGenres] = useState<any>()
+    const [searchVisible, setSearchVisible] = useState(true)
 
 //обновление поиска при изменении инпута
     useEffect(() => {
         new Promise(resolve => setTimeout(resolve,10000))
         setLoading(true)
         fetch(`https://api.themoviedb.org/3/search/movie?query=${text}`, {
-            cache: "no-store", 
             headers: {
             "Content-Type": "application/json",
             'Authorization': `Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJiZTdhYmViMmI4ODRiNWMyZWM0NmFjOWVhMmJjY2ZkMSIsIm5iZiI6MTcxOTI4NDEwNy43NjAxNjMsInN1YiI6IjY2N2EzMGJjNGFmOTM1YTgwY2Y2OTQ4YyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.BYxyk2Wyu7uN44FwhqiRzrdSTcqmV_DL3VI8YXBRFLk`
@@ -83,13 +69,48 @@ const Search = () => {
         })
     }, [])
 
+//Состояние нажатого rated обновит query path
+    const router = useRouter();
+
+    const handleRatedClick = () => {
+        const testURL = window.location.href
+        const url = new URL(testURL)
+        if (url.searchParams.get('rated')) { 
+            return
+        }
+        url.searchParams.append('rated','show')
+        router.refresh()
+        router.push(url.toString())
+    }
+
+    const handleSearchClick = () => {
+        const testURL = window.location.href
+        const url = new URL(testURL)
+        if (!url.searchParams.get('rated')) { 
+            return
+        }
+        url.searchParams.delete('rated')
+        router.push(url.toString())
+        router.refresh()
+    }
+    
+
   return (
     <div className={styles.container}>
         <div className={styles.tab}>
-            <button className={firstClassname} onClick={() => setFirstIsActive(true)}>Search</button>
-            <button className={secondClassname} onClick={() => setFirstIsActive(false)}>Rated</button>
+            <button className={firstClassname} onClick={() => {
+                setFirstIsActive(true)
+                setSearchVisible(true)
+                handleSearchClick()
+                }}>Search</button>
+            <button className={secondClassname} onClick={() => {
+                setFirstIsActive(false)
+                setSearchVisible(false)
+                handleRatedClick()
+                }}>Rated</button>
         </div>
-        <form>
+        {searchVisible ? (<div>
+            <form>
             <input className={styles.input}
             placeholder="Type to search..."
             onChange={(e) => debounce(setText(e.target.value), 1000)}
@@ -119,6 +140,8 @@ const Search = () => {
         }
         { !data?.results.length ? (text ? <div className={styles.notFound}>No matches found! Try another search combination</div> : null) : null}
         </div>
+        </div>) :null}
+
     </div>
   )
 }

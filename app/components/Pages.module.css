@@ -1,4 +1,15 @@
 .pages {
     display: flex;
     justify-content: center;
+    position: absolute;
+    bottom: 17px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+@media only screen and (max-width: 768px) {
+    .pages {
+        bottom: 20px;
+    }
+    
 }

@@ -5,12 +5,14 @@
   min-width: none;
   background-color: white;
   margin: 0 auto;
-  padding: 21px 32px;
+  padding: 21px 32px 43px 32px;
+  min-height: 100vh;
+  position: relative;
 }
 
 @media only screen and (max-width: 768px) {
   .container {
     width: 100vw;
-    padding: 20px 16px;
+    padding: 20px 16px 50px 16px;
   }
 }
