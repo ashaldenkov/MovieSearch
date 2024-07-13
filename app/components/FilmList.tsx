@@ -22,6 +22,7 @@ interface ListProps {
 }
 
 async function getFilms(page: number) {
+    if (!page) page = 1
         const res = await fetch(`https://api.themoviedb.org/3/movie/popular?page=${page}`, {
             headers: {
             "Content-Type": "application/json",
