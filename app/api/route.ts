@@ -1,6 +1,5 @@
 import { cookies } from 'next/headers'
 import { NextRequest, NextResponse } from 'next/server';
-import { revalidateTag } from 'next/cache'
 
 
   async function createGuest() {
