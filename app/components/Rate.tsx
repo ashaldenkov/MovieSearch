@@ -10,8 +10,9 @@ interface rateComponent {
   }
 
 const Rate = ({ id, rating }: rateComponent) => {
+
     //handle rating changes
-    const ratingChanged = (newRating: any) => {
+    const ratingChanged = async (newRating: any) => {
         setStarsValue(newRating)
       }
     
@@ -26,7 +27,7 @@ const Rate = ({ id, rating }: rateComponent) => {
     useEffect(() => {
         const getSession = async () => {
             try {
-               const session = await fetch('http://localhost:3000/api/', {
+               const session = await fetch(`${window.location.origin}/api/`, {
                 method: "GET"
                 })
                 return session.json();
@@ -53,7 +54,7 @@ const Rate = ({ id, rating }: rateComponent) => {
           //skip initial rendering not to post 0 rating
         if (skipCount) setSkipCount(false);
         if (!skipCount) {
-          if (rating !== 0) {
+          if (starsValue !== 0 && starsValue!==rating) {
             postData()
           }
         }
