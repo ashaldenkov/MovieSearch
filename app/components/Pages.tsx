@@ -62,16 +62,6 @@ export default function Pages({ rated, session}: Paginate) {
 
   return (
     <div>
-      <ConfigProvider
-    theme={{
-      components: {
-        Pagination: {
-          itemActiveBg: '#1890FF',
-          colorPrimary: 'white'
-        },
-      },
-    }}
-  >
       { !rated ? (  
         <Pagination
     className={styles.pages}
@@ -92,7 +82,6 @@ export default function Pages({ rated, session}: Paginate) {
     />
     )
     }
-      </ConfigProvider>
     </div>
 
   )

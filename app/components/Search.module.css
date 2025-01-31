@@ -52,12 +52,39 @@
 
 }
 
-.spin {
-    position: absolute;
-    top: -20px;
-}
-
 .notFound {
     padding: 15px 15px;
     height: 50px;
+}
+
+
+.form {
+    position: relative;
+}
+
+.imgClear {
+    top: 27px;
+    right: 10px;
+    position: absolute;
+    cursor: pointer;
+}
+
+/* HTML: <div class="loader"></div> */
+.loader {
+    box-shadow: 0 0 0 0 rgba(0, 0, 0, 1);
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.7);
+    }
+
+    70% {
+        box-shadow: 0 0 0 8px rgba(0, 0, 0, 0);
+    }
+
+    100% {
+        box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+    }
 }
